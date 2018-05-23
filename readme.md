@@ -3,6 +3,8 @@
 # Express middleware for php-fpm
 Express middleware for handling php requests and serve static files.
 
+[<img src="https://i.imgur.com/NuBnRsT.jpg" alt="how to video" width="560" height="315"/>](http://youtu.be/gqKaZO9epHM)
+
  
 
 </div>
@@ -18,8 +20,6 @@ How to install php-fpm on
 [Windows](http://stackoverflow.com/questions/4539670/php-fpm-for-windows),
 [Mac](https://developerjack.com/blog/2016/08/26/Installing-PHP71-with-homebrew/),
 [Linux](https://www.google.com/search?q=how+to+install+php-fpm+on+linux)?
-
-[<img src="https://i.imgur.com/NuBnRsT.jpg" alt="how to video" width="560" height="315"/>](http://youtu.be/gqKaZO9epHM)
 
 ## Usage & Example
 ``` bash
