@@ -1,7 +1,9 @@
+<div align="center">
+
 # Express middleware for php-fpm
 Express middleware for handling php requests and serve static files.
 
-It can be used as replacement for Apache and avoid proxy practice.
+</div>
 
 It's working seamlessly with WordPress, Joomla, Drupal!
 
