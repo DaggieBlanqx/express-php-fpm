@@ -9,6 +9,8 @@ Express middleware for handling php requests and serve static files.
 
 It's working seamlessly with WordPress, Joomla, Drupal!
 
+Software was created in January 2017 by [Pravdomil.com](https://pravdomil.com).
+
 **In order to run the middleware be sure that you have a running php-fpm server**.  
 [What is php-fpm?](http://fastjoomlahost.com/mod_php-fastcgi-php-fpm-server)
 [Why php-fpm?](http://serverfault.com/a/645765/393463)
@@ -45,6 +47,6 @@ app.listen(3000)
 
 ```
 
-## Author
-Software was created in January 2017 by [Pravdomil.com](https://pravdomil.com).
-You can [buy a beer for him](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BCL2X3AFQBAP2&item_name=express-php-fpm%20Beer).
+## Donate
+
+[By buying a beer](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BCL2X3AFQBAP2&item_name=express-php-fpm%20Beer).
