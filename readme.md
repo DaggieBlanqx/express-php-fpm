@@ -11,7 +11,7 @@ Express middleware for handling php requests and serve static files.
 
 It's working seamlessly with WordPress, Joomla, Drupal!
 
-Software was created in January 2017 by [Pravdomil.com](https://pravdomil.com).
+Package was created in January 2017 by [Pravdomil.com](https://pravdomil.com).
 
 **In order to run the middleware be sure that you have a running php-fpm server**.  
 [What is php-fpm?](http://fastjoomlahost.com/mod_php-fastcgi-php-fpm-server)
