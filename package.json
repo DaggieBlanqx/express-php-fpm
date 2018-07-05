@@ -1,7 +1,12 @@
 {
   "name": "express-php-fpm",
   "version": "0.0.33",
-  "description": "Express middleware for php-fpm",
+  "productName": "Express middleware for php-fpm",
+  "description": "Express middleware for handling php requests and serve static files",
+  "homepage": "https://express-php-fpm.pravdomil.com",
+  "keywords": [
+    "programming"
+  ],
   "main": "index.js",
   "author": "pravdomil.com",
   "repository": {
