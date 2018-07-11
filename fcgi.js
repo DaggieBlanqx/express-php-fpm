@@ -27,7 +27,7 @@ module.exports.GetMsgType = function(type) {
   }
 
   for (const key of Object.keys(module.exports.MSG)) {
-    if (module.exports.MSG[key] == type) {
+    if (module.exports.MSG[key] === type) {
       return key
     }
   }
@@ -137,7 +137,7 @@ module.exports.NameValuePair = function(name, value) {
   const buff = Buffer.alloc(nameByteLength + valueByteLength + name.length + value.length)
 
   let i = 0
-  if (nameByteLength == 4) {
+  if (nameByteLength === 4) {
     buff[i++] = (name.length >> 24) | (1 << 7) // unsigned char nameLengthB3   // nameLengthB3  >> 7 == 1
     buff[i++] = name.length >> 16 // unsigned char nameLengthB2
     buff[i++] = name.length >> 8 // unsigned char nameLengthB1
@@ -146,7 +146,7 @@ module.exports.NameValuePair = function(name, value) {
     buff[i++] = name.length // unsigned char nameLengthB0   // nameLengthB0  >> 7 == 0
   }
 
-  if (valueByteLength == 4) {
+  if (valueByteLength === 4) {
     buff[i++] = (value.length >> 24) | (1 << 7) // unsigned char valueLengthB3  // valueLengthB3 >> 7 == 1
     buff[i++] = value.length >> 16 // unsigned char valueLengthB2
     buff[i++] = value.length >> 8 // unsigned char valueLengthB1

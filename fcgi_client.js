@@ -17,7 +17,7 @@ module.exports = class Client {
   }
 
   send(msgType, content) {
-    for (let offset = 0; offset < content.length || offset == 0; offset += 0xffff) {
+    for (let offset = 0; offset < content.length || offset === 0; offset += 0xffff) {
       const chunk = content.slice(offset, offset + 0xffff)
       const header = FCGI.Header(FCGI.VERSION_1, msgType, this.reqId, chunk.length, 0)
       this.socket.write(header)

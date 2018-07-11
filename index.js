@@ -49,7 +49,7 @@ class Handler {
 
   withoutQueryString(url) {
     const sep = url.indexOf("?")
-    return sep == -1 ? url : url.substr(0, sep)
+    return sep === -1 ? url : url.substr(0, sep)
   }
 }
 
@@ -137,7 +137,7 @@ class Responder extends Client {
       const hkey = h.substr(0, hsep)
       const hval = h.substr(hsep + 2)
 
-      if (hkey == "Status") {
+      if (hkey === "Status") {
         this.res.status(parseInt(hval.substr(0, 3)))
         continue
       }
@@ -150,7 +150,7 @@ class Responder extends Client {
 
 function createEnvironment(documentRoot, file, req, extraEnv) {
   const sep = req.url.indexOf("?")
-  const qs = sep == -1 ? "" : req.url.substr(sep + 1)
+  const qs = sep === -1 ? "" : req.url.substr(sep + 1)
 
   const env = {
     GATEWAY_INTERFACE: "CGI/1.1",
