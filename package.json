@@ -3,7 +3,7 @@
   "version": "0.0.33",
   "productName": "Express middleware for php-fpm",
   "description": "Express middleware for handling php requests and serve static files",
-  "homepage": "https://express-php-fpm.pravdomil.com",
+  "homepage": "https://pravdomil.com",
   "keywords": [
     "programming"
   ],
