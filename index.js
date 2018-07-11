@@ -131,7 +131,6 @@ class Responder extends Client {
     const head = content.slice(0, sep)
     const body = content.slice(sep + 4)
 
-    const headers = {}
     for (const h of head.toString().split("\r\n")) {
       const hsep = h.indexOf(":")
       const hkey = h.substr(0, hsep)
