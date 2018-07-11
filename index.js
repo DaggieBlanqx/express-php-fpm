@@ -69,7 +69,7 @@ class Responder extends Client {
     debug("new Responder %d for %s", this.reqId, file)
 
     // send req
-    const env = createEnviroment(handler.opt.documentRoot, file, req, handler.opt.env)
+    const env = createEnvironment(handler.opt.documentRoot, file, req, handler.opt.env)
     this.send(
       FCGI.MSG.BEGIN_REQUEST,
       FCGI.BeginRequestBody(FCGI.ROLE.RESPONDER, FCGI.DONT_KEEP_CONN),
@@ -148,7 +148,7 @@ class Responder extends Client {
   }
 }
 
-function createEnviroment(documentRoot, file, req, extraEnv) {
+function createEnvironment(documentRoot, file, req, extraEnv) {
   const sep = req.url.indexOf("?")
   const qs = sep == -1 ? "" : req.url.substr(sep + 1)
 
