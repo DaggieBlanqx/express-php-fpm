@@ -110,7 +110,7 @@ module.exports.BeginRequestBody = function(role, flags) {
 }
 
 module.exports.NameValuePair = function(name, value) {
-  if (name && name.constructor == Object) {
+  if (name instanceof Object) {
     const bufs = []
     for (const key of Object.keys(name)) {
       bufs.push(module.exports.NameValuePair(key, name[key]))
