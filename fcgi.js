@@ -13,7 +13,7 @@ FCGI.STATUS = { REQUEST_COMPLETE: 0, CANT_MPX_CONN: 1, OVERLOADED: 2, UNKNOWN_RO
 
 FCGI.GetMsgType = function(type) {
   if(!Number.isInteger(type)) { throw new TypeError('Type must be an integer') }
-  
+
   for(const key of Object.keys(FCGI.MSG)) {
     if(FCGI.MSG[key] == type) { return key }
   }
@@ -27,7 +27,7 @@ FCGI.Header = function(version, type, requestId, contentLength, paddingLength) {
   if(!Number.isInteger(paddingLength)) { throw new TypeError('Padding length must be an integer') }
   if(contentLength > 0xFFFF) { throw new TypeError('Content is too big') }
   if(paddingLength > 0xFF) { throw new TypeError('Padding is too big') }
-  
+
   const buff = Buffer.alloc(8)
   buff[0] = version             // unsigned char version
   buff[1] = type                // unsigned char type
@@ -43,26 +43,26 @@ FCGI.Header = function(version, type, requestId, contentLength, paddingLength) {
 FCGI.ParseHeader = function(buff) {
   if(!(buff instanceof Buffer)) { throw new TypeError('ParseHeader accepts only buffers') }
   if(buff.length < 8) { return null }
-  
+
   const version       = buff[0]
   const type          = buff[1]
   const requestId     = buff[2] << 8 | buff[3]
   const contentLength = buff[4] << 8 | buff[5]
   const paddingLength = buff[6]
-  
+
   const recordLength = 8 + contentLength + paddingLength
-  
+
   if(recordLength > buff.length) { return null }
-  
+
   const content = buff.slice(8, 8 + contentLength)
-  
+
   return { version, type, requestId, contentLength, paddingLength, content, recordLength }
 }
 
 FCGI.BeginRequestBody = function(role, flags) {
   if(!Number.isInteger(role)) { throw new TypeError('Role must be an integer') }
   if(!Number.isInteger(flags)) { throw new TypeError('Flags must be an integer') }
-  
+
   const buff = Buffer.alloc(8)
   buff[0] = role >> 8 // unsigned char roleB1
   buff[1] = role      // unsigned char roleB0
@@ -79,17 +79,17 @@ FCGI.NameValuePair = function(name, value) {
     }
     return Buffer.concat(bufs)
   }
-  
+
   if(!(name instanceof Buffer)) { name = String(name) }
   if(!(value instanceof Buffer)) { value = String(value) }
   if(name.length > 0xFFFFFFFF) { throw new TypeError('Name is too long.') }
   if(value.length > 0xFFFFFFFF) { throw new TypeError('Value is too long.') }
-  
+
   const nameByteLength = (name.length > 127) ? 4 : 1
   const valueByteLength = (value.length > 127) ? 4 : 1
-  
+
   const buff = Buffer.alloc(nameByteLength + valueByteLength + name.length + value.length)
-  
+
   let i = 0
   if(nameByteLength == 4) {
     buff[i++] = name.length >> 24 | 1 << 7  // unsigned char nameLengthB3   // nameLengthB3  >> 7 == 1
@@ -100,7 +100,7 @@ FCGI.NameValuePair = function(name, value) {
   else {
     buff[i++] = name.length                 // unsigned char nameLengthB0   // nameLengthB0  >> 7 == 0
   }
-  
+
   if(valueByteLength == 4) {
     buff[i++] = value.length >> 24 | 1 << 7 // unsigned char valueLengthB3  // valueLengthB3 >> 7 == 1
     buff[i++] = value.length >> 16          // unsigned char valueLengthB2
@@ -110,22 +110,22 @@ FCGI.NameValuePair = function(name, value) {
   else {
     buff[i++] = value.length                // unsigned char valueLengthB0  // valueLengthB0 >> 7 == 0
   }
-  
+
   i += buff.write(name, i)                  // unsigned char nameData[nameLength]
   i += buff.write(value, i)                 // unsigned char valueData[valueLength]
-  
+
   return buff
 }
 
 FCGI.ParseEndRequest = function(buff) {
   if(!(buff instanceof Buffer)) { throw new TypeError('ParseEndRequest accepts only buffers') }
-  
+
   const appStatus      = buff[0] << 24 |  // unsigned char appStatusB3
                          buff[1] << 16 |  // unsigned char appStatusB2
                          buff[2] << 8  |  // unsigned char appStatusB1
                          buff[3]          // unsigned char appStatusB0
   const protocolStatus = buff[4]          // unsigned char protocolStatus
                                           // unsigned char reserved[3]
-  
+
   return { appStatus, protocolStatus }
 }
