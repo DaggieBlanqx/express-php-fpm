@@ -1,6 +1,7 @@
 <div align="center">
 
 # Express middleware for php-fpm
+
 Express middleware for handling php requests and serve static files.
 
 [<img src="https://i.imgur.com/NuBnRsT.jpg" alt="how to video" width="560" height="315"/>](http://youtu.be/gqKaZO9epHM)
@@ -20,16 +21,18 @@ How to install php-fpm on
 [Linux](https://www.google.com/search?q=how+to+install+php-fpm+on+linux)?
 
 ## Usage & Example
-``` bash
+
+```bash
 npm i express-php-fpm
 ```
-``` js
-const express = require('express')
-const epf = require('express-php-fpm') 
+
+```js
+const express = require("express")
+const epf = require("express-php-fpm")
 
 const options = {
   // root of your php files
-  documentRoot: __dirname + '/php_files',
+  documentRoot: __dirname + "/php_files",
 
   // extra env variables
   env: {},
@@ -40,9 +43,8 @@ const options = {
 }
 
 const app = express()
-app.use('/', epf(options)) 
+app.use("/", epf(options))
 app.listen(3000)
-
 ```
 
 ## Donate
