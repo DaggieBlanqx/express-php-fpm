@@ -1,14 +1,12 @@
-const FCGI = (module.exports = {})
+module.exports.VERSION_1 = 1
 
-FCGI.VERSION_1 = 1
+module.exports.NULL_REQUEST_ID = 0
 
-FCGI.NULL_REQUEST_ID = 0
+module.exports.DONT_KEEP_CONN = 0
+module.exports.KEEP_CONN = 1
 
-FCGI.DONT_KEEP_CONN = 0
-FCGI.KEEP_CONN = 1
-
-FCGI.ROLE = { RESPONDER: 1, AUTHORIZER: 2, FILTER: 3 }
-FCGI.MSG = {
+module.exports.ROLE = { RESPONDER: 1, AUTHORIZER: 2, FILTER: 3 }
+module.exports.MSG = {
   BEGIN_REQUEST: 1,
   ABORT_REQUEST: 2,
   END_REQUEST: 3,
@@ -21,21 +19,21 @@ FCGI.MSG = {
   GET_VALUES_RESULT: 10,
   UNKNOWN_TYPE: 11,
 }
-FCGI.STATUS = { REQUEST_COMPLETE: 0, CANT_MPX_CONN: 1, OVERLOADED: 2, UNKNOWN_ROLE: 3 }
+module.exports.STATUS = { REQUEST_COMPLETE: 0, CANT_MPX_CONN: 1, OVERLOADED: 2, UNKNOWN_ROLE: 3 }
 
-FCGI.GetMsgType = function(type) {
+module.exports.GetMsgType = function(type) {
   if (!Number.isInteger(type)) {
     throw new TypeError("Type must be an integer")
   }
 
-  for (const key of Object.keys(FCGI.MSG)) {
-    if (FCGI.MSG[key] == type) {
+  for (const key of Object.keys(module.exports.MSG)) {
+    if (module.exports.MSG[key] == type) {
       return key
     }
   }
 }
 
-FCGI.Header = function(version, type, requestId, contentLength, paddingLength) {
+module.exports.Header = function(version, type, requestId, contentLength, paddingLength) {
   if (!Number.isInteger(version)) {
     throw new TypeError("Version must be an integer")
   }
@@ -70,7 +68,7 @@ FCGI.Header = function(version, type, requestId, contentLength, paddingLength) {
   return buff
 }
 
-FCGI.ParseHeader = function(buff) {
+module.exports.ParseHeader = function(buff) {
   if (!(buff instanceof Buffer)) {
     throw new TypeError("ParseHeader accepts only buffers")
   }
@@ -95,7 +93,7 @@ FCGI.ParseHeader = function(buff) {
   return { version, type, requestId, contentLength, paddingLength, content, recordLength }
 }
 
-FCGI.BeginRequestBody = function(role, flags) {
+module.exports.BeginRequestBody = function(role, flags) {
   if (!Number.isInteger(role)) {
     throw new TypeError("Role must be an integer")
   }
@@ -111,11 +109,11 @@ FCGI.BeginRequestBody = function(role, flags) {
   return buff
 }
 
-FCGI.NameValuePair = function(name, value) {
+module.exports.NameValuePair = function(name, value) {
   if (name && name.constructor == Object) {
     const bufs = []
     for (const key of Object.keys(name)) {
-      bufs.push(FCGI.NameValuePair(key, name[key]))
+      bufs.push(module.exports.NameValuePair(key, name[key]))
     }
     return Buffer.concat(bufs)
   }
@@ -163,7 +161,7 @@ FCGI.NameValuePair = function(name, value) {
   return buff
 }
 
-FCGI.ParseEndRequest = function(buff) {
+module.exports.ParseEndRequest = function(buff) {
   if (!(buff instanceof Buffer)) {
     throw new TypeError("ParseEndRequest accepts only buffers")
   }
