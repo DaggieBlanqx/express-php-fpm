@@ -1,6 +1,6 @@
 {
   "name": "express-php-fpm",
-  "version": "0.0.33",
+  "version": "1.0.0",
   "productName": "Express middleware for php-fpm",
   "description": "Express middleware for handling php requests and serve static files",
   "homepage": "https://pravdomil.com",
