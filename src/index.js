@@ -72,7 +72,7 @@ class Responder extends Client {
     const env = createEnvironment(handler.opt.documentRoot, file, req, handler.opt.env)
     this.send(
       FCGI.MSG.BEGIN_REQUEST,
-      FCGI.BeginRequestBody(FCGI.ROLE.RESPONDER, FCGI.DONT_KEEP_CONN),
+      FCGI.BeginRequestBody(FCGI.ROLE.RESPONDER, FCGI.DONT_KEEP_CONN)
     )
     this.send(FCGI.MSG.PARAMS, FCGI.NameValuePair(env))
     this.send(FCGI.MSG.PARAMS, Buffer.alloc(0))
@@ -178,7 +178,7 @@ function createEnvironment(documentRoot, file, req, extraEnv) {
     QUERY_STRING: qs,
 
     CONTENT_TYPE: req.headers["content-type"] || "",
-    CONTENT_LENGTH: req.headers["content-length"] || "",
+    CONTENT_LENGTH: req.headers["content-length"] || ""
 
     // AUTH_TYPE
     // PATH_INFO
