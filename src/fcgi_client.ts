@@ -1,11 +1,12 @@
-import net from "net"
+import net, { NetConnectOpts, Socket } from "net"
 import * as FCGI from "./fcgi"
 
 export class Client {
-  constructor(socketOptions) {
-    this.buffer = Buffer.alloc(0)
-    this.reqId = 0
-
+  buffer = Buffer.alloc(0)
+  reqId = 0
+  socket: Socket
+  
+  constructor(socketOptions: NetConnectOpts) {
     this.socket = net.connect(socketOptions)
     this.socket.on("data", this.onData.bind(this))
     if (this.onClose) {
