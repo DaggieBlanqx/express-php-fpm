@@ -12,7 +12,7 @@ export default function init(opt: Options) {
   return new Handler(opt).router
 }
 
-class Handler {
+export class Handler {
   connections = new Array(100)
   router = express.Router()
 
