@@ -112,8 +112,8 @@ function createEnvironment(documentRoot: string, file: string, req: Request, ext
     REQUEST_METHOD: req.method,
     REDIRECT_STATUS: 200, // https://stackoverflow.com/questions/24378472/what-is-php-serverredirect-status
 
-    REMOTE_ADDR: req.connection.remoteAddress,
-    REMOTE_PORT: req.connection.remotePort,
+    REMOTE_ADDR: req.connection.remoteAddress || "",
+    REMOTE_PORT: req.connection.remotePort || "",
 
     SERVER_PROTOCOL: req.protocol.toUpperCase() + "/" + req.httpVersion,
     SERVER_ADDR: req.connection.localAddress,
