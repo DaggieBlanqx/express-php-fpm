@@ -1,8 +1,8 @@
+import debug0 from "debug"
 import express, { NextFunction, Request, Response } from "express"
 import { NetConnectOpts } from "net"
 import * as FCGI from "./FCGI"
 import { FCGIClient } from "./FCGIClient"
-import debug0 from "debug"
 
 const debug = debug0("express-php-fpm")
 
