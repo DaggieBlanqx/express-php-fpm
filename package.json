@@ -31,5 +31,6 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-typescript": "^7.0.0",
     "@types/node": "^10.5.2"
-  }
+  },
+  "browserslist": "node 6"
 }
