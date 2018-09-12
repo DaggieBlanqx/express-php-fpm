@@ -13,15 +13,12 @@ export default function init(opt: Options) {
 }
 
 class Handler {
-  constructor(opt) {
+  connections = new Array(100)
+  router = express.Router()
+
+  constructor(public opt: Options) {
     debug("new Router")
 
-    // locals
-    this.opt = opt
-    this.connections = new Array(100)
-    this.router = express.Router()
-
-    // router
     this.router.use(this.handle.bind(this))
     this.router.use(express.static(opt.documentRoot))
   }
