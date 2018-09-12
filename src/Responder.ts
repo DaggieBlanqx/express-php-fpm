@@ -8,16 +8,20 @@ import { Handler, KeyValue } from "./index"
 const debug = debug0("express-php-fpm:responder")
 
 export class Responder extends FCGIClient {
-  constructor(handler: Handler, file: string, req: Request, res: Response, next: NextFunction) {
+  gotHead = false
+
+  constructor(
+    public handler: Handler,
+    file: string,
+    public req: Request,
+    public res: Response,
+    public next: NextFunction,
+  ) {
     // init sockets
     super(handler.opt.socketOptions)
 
     // locals
-    this.handler = handler
-    this.res = res
-    this.next = next
     this.reqId = handler.getFreeReqId()
-    this.gotHead = false
 
     // debug
     debug("new Responder %d for %s", this.reqId, file)
