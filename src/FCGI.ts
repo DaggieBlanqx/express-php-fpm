@@ -135,19 +135,19 @@ export function createKeyValueBuffer(key: string, valueArg: Buffer | number | st
     throw new TypeError("Value is too long.")
   }
 
-  const nameByteLength = key.length > 127 ? 4 : 1
+  const keyByteLength = key.length > 127 ? 4 : 1
   const valueByteLength = value.length > 127 ? 4 : 1
 
-  const buff = Buffer.alloc(nameByteLength + valueByteLength + key.length + value.length)
+  const buff = Buffer.alloc(keyByteLength + valueByteLength + key.length + value.length)
 
   let i = 0
-  if (nameByteLength === 4) {
-    buff[i++] = (key.length >> 24) | (1 << 7) // unsigned char nameLengthB3   // nameLengthB3  >> 7 == 1
-    buff[i++] = key.length >> 16 // unsigned char nameLengthB2
-    buff[i++] = key.length >> 8 // unsigned char nameLengthB1
-    buff[i++] = key.length // unsigned char nameLengthB0
+  if (keyByteLength === 4) {
+    buff[i++] = (key.length >> 24) | (1 << 7) // unsigned char keyLengthB3   // keyLengthB3  >> 7 == 1
+    buff[i++] = key.length >> 16 // unsigned char keyLengthB2
+    buff[i++] = key.length >> 8 // unsigned char keyLengthB1
+    buff[i++] = key.length // unsigned char keyLengthB0
   } else {
-    buff[i++] = key.length // unsigned char nameLengthB0   // nameLengthB0  >> 7 == 0
+    buff[i++] = key.length // unsigned char keyLengthB0   // keyLengthB0  >> 7 == 0
   }
 
   if (valueByteLength === 4) {
@@ -159,7 +159,7 @@ export function createKeyValueBuffer(key: string, valueArg: Buffer | number | st
     buff[i++] = value.length // unsigned char valueLengthB0  // valueLengthB0 >> 7 == 0
   }
 
-  i += buff.write(key, i) // unsigned char nameData[nameLength]
+  i += buff.write(key, i) // unsigned char keyData[keyLength]
   i += buff.write(value, i) // unsigned char valueData[valueLength]
 
   return buff
