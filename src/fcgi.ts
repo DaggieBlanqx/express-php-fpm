@@ -74,7 +74,7 @@ export function Header(
   return buff
 }
 
-export function ParseHeader(buff) {
+export function ParseHeader(buff: Buffer) {
   if (!(buff instanceof Buffer)) {
     throw new TypeError("ParseHeader accepts only buffers")
   }
@@ -99,7 +99,7 @@ export function ParseHeader(buff) {
   return { version, type, requestId, contentLength, paddingLength, content, recordLength }
 }
 
-export function BeginRequestBody(role, flags) {
+export function BeginRequestBody(role: number, flags: number) {
   if (!Number.isInteger(role)) {
     throw new TypeError("Role must be an integer")
   }
@@ -167,7 +167,7 @@ export function NameValuePair(name, value) {
   return buff
 }
 
-export function ParseEndRequest(buff) {
+export function ParseEndRequest(buff: Buffer) {
   if (!(buff instanceof Buffer)) {
     throw new TypeError("ParseEndRequest accepts only buffers")
   }
