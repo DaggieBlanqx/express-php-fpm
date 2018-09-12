@@ -8,7 +8,7 @@ const debug = debug0("express-php-fpm")
 export type KeyValue = { [i: string]: string | number }
 export type Options = { documentRoot: string; env: KeyValue; socketOptions: NetConnectOpts }
 
-export default function init(opt) {
+export default function init(opt: Options) {
   return new Handler(opt).router
 }
 
