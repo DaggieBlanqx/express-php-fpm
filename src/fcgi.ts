@@ -21,7 +21,7 @@ export const MSG = {
 }
 export const STATUS = { REQUEST_COMPLETE: 0, CANT_MPX_CONN: 1, OVERLOADED: 2, UNKNOWN_ROLE: 3 }
 
-export function GetMsgType(type) {
+export function GetMsgType(type: number) {
   if (!Number.isInteger(type)) {
     throw new TypeError("Type must be an integer")
   }
@@ -33,7 +33,13 @@ export function GetMsgType(type) {
   }
 }
 
-export function Header(version, type, requestId, contentLength, paddingLength) {
+export function Header(
+  version: number,
+  type: number,
+  requestId: number,
+  contentLength: number,
+  paddingLength: number,
+) {
   if (!Number.isInteger(version)) {
     throw new TypeError("Version must be an integer")
   }
