@@ -1,5 +1,6 @@
 import net, { NetConnectOpts, Socket } from "net"
 import * as FCGI from "./FCGI"
+import { Record } from "./FCGI"
 
 export class FCGIClient {
   buffer = Buffer.alloc(0)
@@ -44,5 +45,5 @@ export class FCGIClient {
 
   onClose(hadError: boolean) {}
 
-  onRecord(record) {}
+  onRecord(record: Record) {}
 }

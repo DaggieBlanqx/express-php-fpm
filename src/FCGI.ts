@@ -57,7 +57,17 @@ export function createHeader(
   return buff
 }
 
-export function parseHeader(buff: Buffer) {
+export type Record = {
+  version: number
+  type: number
+  requestId: number
+  contentLength: number
+  paddingLength: number
+  content: Buffer
+  recordLength: number
+}
+
+export function parseHeader(buff: Buffer): Record | null {
   if (buff.length < 8) {
     return null
   }
