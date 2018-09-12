@@ -5,15 +5,15 @@
   "description": "Express middleware for handling php requests and serve static files",
   "homepage": "https://pravdomil.com",
   "main": "src",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pravdomil/express-php-fpm.git"
-  },
   "files": [
     "bin",
     "lib",
     "src"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pravdomil/express-php-fpm.git"
+  },
   "dependencies": {
     "debug": "^2.6.0",
     "express": "^4.16.2"
