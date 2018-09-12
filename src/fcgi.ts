@@ -33,7 +33,7 @@ export function GetMsgType(type: number) {
   }
 }
 
-export function Header(
+export function createHeader(
   version: number,
   type: number,
   requestId: number,
