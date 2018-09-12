@@ -193,9 +193,12 @@ function createEnvironment(documentRoot: string, file: string, req: Request, ext
     // UNIQUE_ID
   }
 
-  for (const [key, value] of Object.entries(req.headers)) {
-    env["HTTP_" + key.toUpperCase().replace(/-/g, "_")] = String(value)
-  }
+  const headers = Object.entries(req.headers).reduce(
+    (acc, [key, value]) => {
+      return { ...acc, ["HTTP_" + key.toUpperCase().replace(/-/g, "_")]: String(value) }
+    },
+    {} as KeyValue,
+  )
 
-  return { ...env, ...extraEnv }
+  return { ...env, ...headers, ...extraEnv }
 }
