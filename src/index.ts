@@ -5,7 +5,7 @@ import debug0 from "debug"
 
 const debug = debug0("express-php-fpm")
 
-export type KeyValue = { [i: string]: string | number | undefined }
+export type KeyValue = { [i: string]: string | number }
 
 module.exports = init
 
@@ -78,7 +78,7 @@ class Responder extends FCGIClient {
       FCGI.MSG.BEGIN_REQUEST,
       FCGI.createBeginRequestBody(FCGI.ROLE.RESPONDER, FCGI.DONT_KEEP_CONN),
     )
-    this.send(FCGI.MSG.PARAMS, FCGI.createNameValuePair(env))
+    this.send(FCGI.MSG.PARAMS, FCGI.createKeyValueBufferFromObject(env))
     this.send(FCGI.MSG.PARAMS, Buffer.alloc(0))
 
     // express request

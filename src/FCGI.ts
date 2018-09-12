@@ -1,3 +1,5 @@
+import { KeyValue } from "./index"
+
 export const VERSION_1 = 1
 
 export const NULL_REQUEST_ID = 0
@@ -115,21 +117,17 @@ export function createBeginRequestBody(role: number, flags: number) {
   return buff
 }
 
-export function createNameValuePair(name, value) {
-  if (name instanceof Object) {
-    const bufs = []
-    for (const key of Object.keys(name)) {
-      bufs.push(createNameValuePair(key, name[key]))
-    }
-    return Buffer.concat(bufs)
-  }
+export function createKeyValueBufferFromObject(object: KeyValue) {
+  const buffers = Object.entries(object).map(([key, value]) => {
+    return createKeyValueBuffer(key, value)
+  })
 
-  if (!(name instanceof Buffer)) {
-    name = String(name)
-  }
-  if (!(value instanceof Buffer)) {
-    value = String(value)
-  }
+  return Buffer.concat(buffers)
+}
+
+export function createKeyValueBuffer(name: string, valueArg: Buffer | number | string) {
+  const value = valueArg instanceof Buffer ? valueArg : String(valueArg)
+
   if (name.length > 0xffffffff) {
     throw new TypeError("Name is too long.")
   }
