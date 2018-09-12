@@ -32,15 +32,15 @@ export class Responder extends FCGIClient {
     this.send(FCGI.MSG.PARAMS, Buffer.alloc(0))
 
     // express request
-    req.on("data", this.reqData.bind(this))
-    req.on("end", this.reqEnd.bind(this))
+    req.on("data", this.onReqData.bind(this))
+    req.on("end", this.onReqEnd.bind(this))
   }
 
-  reqData(chunk: Buffer) {
+  onReqData(chunk: Buffer) {
     this.send(FCGI.MSG.STDIN, chunk)
   }
 
-  reqEnd() {
+  onReqEnd() {
     this.send(FCGI.MSG.STDIN, Buffer.alloc(0))
   }
 
