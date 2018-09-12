@@ -1,13 +1,13 @@
 import debug0 from "debug"
-import { Request } from "express"
+import { NextFunction, Request, Response } from "express"
 import * as FCGI from "./FCGI"
 import { FCGIClient } from "./FCGIClient"
-import { KeyValue } from "./index"
+import { Handler, KeyValue } from "./index"
 
 const debug = debug0("express-php-fpm:responder")
 
 export class Responder extends FCGIClient {
-  constructor(handler, file, req, res, next) {
+  constructor(handler: Handler, file: string, req: Request, res: Response, next: NextFunction) {
     // init sockets
     super(handler.opt.socketOptions)
 
