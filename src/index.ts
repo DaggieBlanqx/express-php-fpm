@@ -191,8 +191,8 @@ function createEnvironment(documentRoot, file, req, extraEnv) {
     // UNIQUE_ID
   }
 
-  for (const key of Object.keys(req.headers)) {
-    env["HTTP_" + key.toUpperCase().replace(/-/g, "_")] = req.headers[key]
+  for (const [key, value] of Object.entries(req.headers)) {
+    env["HTTP_" + key.toUpperCase().replace(/-/g, "_")] = value
   }
 
   Object.assign(env, extraEnv)
