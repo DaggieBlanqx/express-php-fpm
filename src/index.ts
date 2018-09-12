@@ -7,9 +7,7 @@ const debug = debug0("express-php-fpm")
 
 export type KeyValue = { [i: string]: string | number }
 
-module.exports = init
-
-function init(opt) {
+export default function init(opt) {
   return new Handler(opt).router
 }
 
