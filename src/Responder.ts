@@ -1,6 +1,7 @@
 import debug0 from "debug"
 import { NextFunction, Request, Response } from "express"
 import * as FCGI from "./FCGI"
+import { Record } from "./FCGI"
 import { FCGIClient } from "./FCGIClient"
 import { Handler, KeyValue } from "./index"
 
@@ -35,7 +36,7 @@ export class Responder extends FCGIClient {
     req.on("end", this.reqEnd.bind(this))
   }
 
-  reqData(chunk) {
+  reqData(chunk: Buffer) {
     this.send(FCGI.MSG.STDIN, chunk)
   }
 
@@ -43,20 +44,20 @@ export class Responder extends FCGIClient {
     this.send(FCGI.MSG.STDIN, Buffer.alloc(0))
   }
 
-  onError(e) {
+  onError(e: Error) {
     this.next(e)
   }
 
-  onClose(hadError) {
+  onClose(hadError: boolean) {
     this.handler.freeUpReqId(this.reqId)
   }
 
-  send(msgType, content) {
+  send(msgType: number, content: Buffer) {
     debug("send %s", FCGI.GetMsgType(msgType))
     super.send(msgType, content)
   }
 
-  onRecord(record) {
+  onRecord(record: Record) {
     debug("got %s", FCGI.GetMsgType(record.type))
 
     switch (record.type) {
@@ -73,7 +74,7 @@ export class Responder extends FCGIClient {
     }
   }
 
-  stdout(content) {
+  stdout(content: Buffer) {
     if (this.gotHead) {
       this.res.write(content)
       return
