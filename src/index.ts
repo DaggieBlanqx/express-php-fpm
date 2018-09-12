@@ -1,9 +1,11 @@
-import express from "express"
+import express, { Request } from "express"
 import * as FCGI from "./fcgi"
 import { Client } from "./fcgi_client"
 import debug0 from "debug"
 
 const debug = debug0("express-php-fpm")
+
+export type KeyValue = { [i: string]: string | number | undefined }
 
 module.exports = init
 
@@ -149,11 +151,11 @@ class Responder extends Client {
   }
 }
 
-function createEnvironment(documentRoot, file, req, extraEnv) {
+function createEnvironment(documentRoot: string, file: string, req: Request, extraEnv: KeyValue) {
   const sep = req.url.indexOf("?")
   const qs = sep === -1 ? "" : req.url.substr(sep + 1)
 
-  const env = {
+  const env: KeyValue = {
     GATEWAY_INTERFACE: "CGI/1.1",
     PATH: "",
 
