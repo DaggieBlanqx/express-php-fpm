@@ -160,7 +160,7 @@ export function createKeyValueBuffer(key: string, valueArg: Buffer | number | st
   }
 
   i += buff.write(key, i) // unsigned char keyData[keyLength]
-  i += buff.write(value, i) // unsigned char valueData[valueLength]
+  i += buff.write(value as any, i) // unsigned char valueData[valueLength]
 
   return buff
 }
