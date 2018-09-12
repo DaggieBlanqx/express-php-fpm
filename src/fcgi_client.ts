@@ -30,7 +30,7 @@ export class Client {
     this.buffer = Buffer.concat([this.buffer, data])
 
     while (this.buffer.length) {
-      const record = FCGI.ParseHeader(this.buffer)
+      const record = FCGI.parseHeader(this.buffer)
       if (!record) {
         break
       }

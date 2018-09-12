@@ -74,9 +74,9 @@ export function createHeader(
   return buff
 }
 
-export function ParseHeader(buff: Buffer) {
+export function parseHeader(buff: Buffer) {
   if (!(buff instanceof Buffer)) {
-    throw new TypeError("ParseHeader accepts only buffers")
+    throw new TypeError("parseHeader accepts only buffers")
   }
   if (buff.length < 8) {
     return null
