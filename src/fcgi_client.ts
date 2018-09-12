@@ -26,7 +26,7 @@ export class Client {
     }
   }
 
-  onData(data) {
+  onData(data: Buffer) {
     this.buffer = Buffer.concat([this.buffer, data])
 
     while (this.buffer.length) {
@@ -39,6 +39,10 @@ export class Client {
       this.got(record)
     }
   }
+
+  onError(e: Error) {}
+
+  onClose(hadError: boolean) {}
 
   got(record) {
     // to be implemented in child class
