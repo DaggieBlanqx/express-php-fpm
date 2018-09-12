@@ -1,5 +1,5 @@
 import net, { NetConnectOpts, Socket } from "net"
-import * as FCGI from "./fcgi"
+import * as FCGI from "./FCGI"
 
 export class FCGIClient {
   buffer = Buffer.alloc(0)

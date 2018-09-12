@@ -1,5 +1,5 @@
 import express, { Request } from "express"
-import * as FCGI from "./fcgi"
+import * as FCGI from "./FCGI"
 import { FCGIClient } from "./FCGIClient"
 import debug0 from "debug"
 
