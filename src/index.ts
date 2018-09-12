@@ -74,9 +74,9 @@ class Responder extends Client {
     const env = createEnvironment(handler.opt.documentRoot, file, req, handler.opt.env)
     this.send(
       FCGI.MSG.BEGIN_REQUEST,
-      FCGI.BeginRequestBody(FCGI.ROLE.RESPONDER, FCGI.DONT_KEEP_CONN),
+      FCGI.createBeginRequestBody(FCGI.ROLE.RESPONDER, FCGI.DONT_KEEP_CONN),
     )
-    this.send(FCGI.MSG.PARAMS, FCGI.NameValuePair(env))
+    this.send(FCGI.MSG.PARAMS, FCGI.createNameValuePair(env))
     this.send(FCGI.MSG.PARAMS, Buffer.alloc(0))
 
     // express request

@@ -99,7 +99,7 @@ export function parseHeader(buff: Buffer) {
   return { version, type, requestId, contentLength, paddingLength, content, recordLength }
 }
 
-export function BeginRequestBody(role: number, flags: number) {
+export function createBeginRequestBody(role: number, flags: number) {
   if (!Number.isInteger(role)) {
     throw new TypeError("Role must be an integer")
   }
@@ -115,11 +115,11 @@ export function BeginRequestBody(role: number, flags: number) {
   return buff
 }
 
-export function NameValuePair(name, value) {
+export function createNameValuePair(name, value) {
   if (name instanceof Object) {
     const bufs = []
     for (const key of Object.keys(name)) {
-      bufs.push(NameValuePair(key, name[key]))
+      bufs.push(createNameValuePair(key, name[key]))
     }
     return Buffer.concat(bufs)
   }
