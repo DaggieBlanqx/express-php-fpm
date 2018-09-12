@@ -194,7 +194,7 @@ function createEnvironment(documentRoot: string, file: string, req: Request, ext
   }
 
   for (const [key, value] of Object.entries(req.headers)) {
-    env["HTTP_" + key.toUpperCase().replace(/-/g, "_")] = value
+    env["HTTP_" + key.toUpperCase().replace(/-/g, "_")] = String(value)
   }
 
   Object.assign(env, extraEnv)
