@@ -26,8 +26,8 @@ export function GetMsgType(type: number) {
     throw new TypeError("Type must be an integer")
   }
 
-  for (const key of Object.keys(module.exports.MSG)) {
-    if (module.exports.MSG[key] === type) {
+  for (const key of Object.keys(MSG)) {
+    if (MSG[key] === type) {
       return key
     }
   }
@@ -119,7 +119,7 @@ export function NameValuePair(name, value) {
   if (name instanceof Object) {
     const bufs = []
     for (const key of Object.keys(name)) {
-      bufs.push(module.exports.NameValuePair(key, name[key]))
+      bufs.push(NameValuePair(key, name[key]))
     }
     return Buffer.concat(bufs)
   }
