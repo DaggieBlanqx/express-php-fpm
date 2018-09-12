@@ -12,7 +12,7 @@ Express middleware for handling php requests and serve static files.
 
 It's working seamlessly with WordPress, Joomla, Drupal!
 
-**In order to run the middleware be sure that you have a running php-fpm server**.  
+**In order to run the middleware be sure that you have a running php-fpm server**.
 [What is php-fpm?](http://fastjoomlahost.com/mod_php-fastcgi-php-fpm-server)
 [Why php-fpm?](http://serverfault.com/a/645765/393463)
 How to install php-fpm on
@@ -28,7 +28,7 @@ npm i express-php-fpm
 
 ```js
 const express = require("express")
-const epf = require("express-php-fpm")
+const epf = require("express-php-fpm").default
 
 const options = {
   // root of your php files
