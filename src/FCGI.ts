@@ -24,10 +24,6 @@ export const MSG = {
 export const STATUS = { REQUEST_COMPLETE: 0, CANT_MPX_CONN: 1, OVERLOADED: 2, UNKNOWN_ROLE: 3 }
 
 export function GetMsgType(type: number) {
-  if (!Number.isInteger(type)) {
-    throw new TypeError("Type must be an integer")
-  }
-
   for (const [key, value] of Object.entries(MSG)) {
     if (value === type) {
       return key
@@ -42,21 +38,6 @@ export function createHeader(
   contentLength: number,
   paddingLength: number,
 ) {
-  if (!Number.isInteger(version)) {
-    throw new TypeError("Version must be an integer")
-  }
-  if (!Number.isInteger(type)) {
-    throw new TypeError("Message type must be an integer")
-  }
-  if (!Number.isInteger(requestId)) {
-    throw new TypeError("Request id must be an integer")
-  }
-  if (!Number.isInteger(contentLength)) {
-    throw new TypeError("Content length must be an integer")
-  }
-  if (!Number.isInteger(paddingLength)) {
-    throw new TypeError("Padding length must be an integer")
-  }
   if (contentLength > 0xffff) {
     throw new TypeError("Content is too big")
   }
@@ -77,9 +58,6 @@ export function createHeader(
 }
 
 export function parseHeader(buff: Buffer) {
-  if (!(buff instanceof Buffer)) {
-    throw new TypeError("parseHeader accepts only buffers")
-  }
   if (buff.length < 8) {
     return null
   }
@@ -102,13 +80,6 @@ export function parseHeader(buff: Buffer) {
 }
 
 export function createBeginRequestBody(role: number, flags: number) {
-  if (!Number.isInteger(role)) {
-    throw new TypeError("Role must be an integer")
-  }
-  if (!Number.isInteger(flags)) {
-    throw new TypeError("Flags must be an integer")
-  }
-
   const buff = Buffer.alloc(8)
   buff[0] = role >> 8 // unsigned char roleB1
   buff[1] = role // unsigned char roleB0
@@ -166,10 +137,6 @@ export function createKeyValueBuffer(key: string, valueArg: Buffer | number | st
 }
 
 export function parseEndRequest(buff: Buffer) {
-  if (!(buff instanceof Buffer)) {
-    throw new TypeError("parseEndRequest accepts only buffers")
-  }
-
   const appStatus =
     (buff[0] << 24) | // unsigned char appStatusB3
     (buff[1] << 16) | // unsigned char appStatusB2
