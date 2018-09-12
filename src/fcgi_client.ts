@@ -7,14 +7,14 @@ export class Client {
   socket: Socket
 
   constructor(socketOptions: NetConnectOpts) {
+    this.onData = this.onData.bind(this)
+    this.onError = this.onError.bind(this)
+    this.onClose = this.onClose.bind(this)
+
     this.socket = net.connect(socketOptions)
-    this.socket.on("data", this.onData.bind(this))
-    if (this.onClose) {
-      this.socket.on("close", this.onClose.bind(this))
-    }
-    if (this.onError) {
-      this.socket.on("error", this.onError.bind(this))
-    }
+    this.socket.on("data", this.onData)
+    this.socket.on("error", this.onError)
+    this.socket.on("close", this.onClose)
   }
 
   send(msgType: number, content: Buffer) {
