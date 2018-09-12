@@ -125,29 +125,29 @@ export function createKeyValueBufferFromObject(object: KeyValue) {
   return Buffer.concat(buffers)
 }
 
-export function createKeyValueBuffer(name: string, valueArg: Buffer | number | string) {
+export function createKeyValueBuffer(key: string, valueArg: Buffer | number | string) {
   const value = valueArg instanceof Buffer ? valueArg : String(valueArg)
 
-  if (name.length > 0xffffffff) {
-    throw new TypeError("Name is too long.")
+  if (key.length > 0xffffffff) {
+    throw new TypeError("Key is too long.")
   }
   if (value.length > 0xffffffff) {
     throw new TypeError("Value is too long.")
   }
 
-  const nameByteLength = name.length > 127 ? 4 : 1
+  const nameByteLength = key.length > 127 ? 4 : 1
   const valueByteLength = value.length > 127 ? 4 : 1
 
-  const buff = Buffer.alloc(nameByteLength + valueByteLength + name.length + value.length)
+  const buff = Buffer.alloc(nameByteLength + valueByteLength + key.length + value.length)
 
   let i = 0
   if (nameByteLength === 4) {
-    buff[i++] = (name.length >> 24) | (1 << 7) // unsigned char nameLengthB3   // nameLengthB3  >> 7 == 1
-    buff[i++] = name.length >> 16 // unsigned char nameLengthB2
-    buff[i++] = name.length >> 8 // unsigned char nameLengthB1
-    buff[i++] = name.length // unsigned char nameLengthB0
+    buff[i++] = (key.length >> 24) | (1 << 7) // unsigned char nameLengthB3   // nameLengthB3  >> 7 == 1
+    buff[i++] = key.length >> 16 // unsigned char nameLengthB2
+    buff[i++] = key.length >> 8 // unsigned char nameLengthB1
+    buff[i++] = key.length // unsigned char nameLengthB0
   } else {
-    buff[i++] = name.length // unsigned char nameLengthB0   // nameLengthB0  >> 7 == 0
+    buff[i++] = key.length // unsigned char nameLengthB0   // nameLengthB0  >> 7 == 0
   }
 
   if (valueByteLength === 4) {
@@ -159,7 +159,7 @@ export function createKeyValueBuffer(name: string, valueArg: Buffer | number | s
     buff[i++] = value.length // unsigned char valueLengthB0  // valueLengthB0 >> 7 == 0
   }
 
-  i += buff.write(name, i) // unsigned char nameData[nameLength]
+  i += buff.write(key, i) // unsigned char nameData[nameLength]
   i += buff.write(value, i) // unsigned char valueData[valueLength]
 
   return buff
