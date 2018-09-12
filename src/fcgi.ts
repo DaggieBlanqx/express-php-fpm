@@ -26,8 +26,8 @@ export function GetMsgType(type: number) {
     throw new TypeError("Type must be an integer")
   }
 
-  for (const key of Object.keys(MSG)) {
-    if (MSG[key] === type) {
+  for (const [key, value] of Object.entries(MSG)) {
+    if (value === type) {
       return key
     }
   }
