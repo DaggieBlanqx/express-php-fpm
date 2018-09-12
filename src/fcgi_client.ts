@@ -1,7 +1,7 @@
-const net = require("net")
-const FCGI = require("./fcgi")
+import net from "net"
+import * as FCGI from "./fcgi"
 
-module.exports = class Client {
+export class Client {
   constructor(socketOptions) {
     this.buffer = Buffer.alloc(0)
     this.reqId = 0

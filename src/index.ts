@@ -1,7 +1,9 @@
-const express = require("express")
-const FCGI = require("./fcgi")
-const Client = require("./fcgi_client")
-const debug = require("debug")("express-php-fpm")
+import express from "express"
+import * as FCGI from "./fcgi"
+import { Client } from "./fcgi_client"
+import debug0 from "debug"
+
+const debug = debug0("express-php-fpm")
 
 module.exports = init
 

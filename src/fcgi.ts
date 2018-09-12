@@ -1,12 +1,12 @@
-module.exports.VERSION_1 = 1
+export const VERSION_1 = 1
 
-module.exports.NULL_REQUEST_ID = 0
+export const NULL_REQUEST_ID = 0
 
-module.exports.DONT_KEEP_CONN = 0
-module.exports.KEEP_CONN = 1
+export const DONT_KEEP_CONN = 0
+export const KEEP_CONN = 1
 
-module.exports.ROLE = { RESPONDER: 1, AUTHORIZER: 2, FILTER: 3 }
-module.exports.MSG = {
+export const ROLE = { RESPONDER: 1, AUTHORIZER: 2, FILTER: 3 }
+export const MSG = {
   BEGIN_REQUEST: 1,
   ABORT_REQUEST: 2,
   END_REQUEST: 3,
@@ -19,9 +19,9 @@ module.exports.MSG = {
   GET_VALUES_RESULT: 10,
   UNKNOWN_TYPE: 11,
 }
-module.exports.STATUS = { REQUEST_COMPLETE: 0, CANT_MPX_CONN: 1, OVERLOADED: 2, UNKNOWN_ROLE: 3 }
+export const STATUS = { REQUEST_COMPLETE: 0, CANT_MPX_CONN: 1, OVERLOADED: 2, UNKNOWN_ROLE: 3 }
 
-module.exports.GetMsgType = function(type) {
+export function GetMsgType(type) {
   if (!Number.isInteger(type)) {
     throw new TypeError("Type must be an integer")
   }
@@ -33,7 +33,7 @@ module.exports.GetMsgType = function(type) {
   }
 }
 
-module.exports.Header = function(version, type, requestId, contentLength, paddingLength) {
+export function Header(version, type, requestId, contentLength, paddingLength) {
   if (!Number.isInteger(version)) {
     throw new TypeError("Version must be an integer")
   }
@@ -68,7 +68,7 @@ module.exports.Header = function(version, type, requestId, contentLength, paddin
   return buff
 }
 
-module.exports.ParseHeader = function(buff) {
+export function ParseHeader(buff) {
   if (!(buff instanceof Buffer)) {
     throw new TypeError("ParseHeader accepts only buffers")
   }
@@ -93,7 +93,7 @@ module.exports.ParseHeader = function(buff) {
   return { version, type, requestId, contentLength, paddingLength, content, recordLength }
 }
 
-module.exports.BeginRequestBody = function(role, flags) {
+export function BeginRequestBody(role, flags) {
   if (!Number.isInteger(role)) {
     throw new TypeError("Role must be an integer")
   }
@@ -109,7 +109,7 @@ module.exports.BeginRequestBody = function(role, flags) {
   return buff
 }
 
-module.exports.NameValuePair = function(name, value) {
+export function NameValuePair(name, value) {
   if (name instanceof Object) {
     const bufs = []
     for (const key of Object.keys(name)) {
@@ -161,7 +161,7 @@ module.exports.NameValuePair = function(name, value) {
   return buff
 }
 
-module.exports.ParseEndRequest = function(buff) {
+export function ParseEndRequest(buff) {
   if (!(buff instanceof Buffer)) {
     throw new TypeError("ParseEndRequest accepts only buffers")
   }
