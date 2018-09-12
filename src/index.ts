@@ -27,7 +27,7 @@ class Handler {
   }
 
   handle(req: Request, res: Response, next: NextFunction) {
-    let file = this.withoutQueryString(req.url)
+    let file = withoutQueryString(req.url)
     if (file.endsWith("/")) {
       file += "index.php"
     }
@@ -49,9 +49,9 @@ class Handler {
   freeUpReqId(reqId) {
     this.connections[reqId] = false
   }
+}
 
-  withoutQueryString(url) {
-    const sep = url.indexOf("?")
-    return sep === -1 ? url : url.substr(0, sep)
-  }
+function withoutQueryString(url: string) {
+  const sep = url.indexOf("?")
+  return sep === -1 ? url : url.substr(0, sep)
 }
