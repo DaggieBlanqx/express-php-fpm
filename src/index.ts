@@ -1,6 +1,6 @@
 import express, { Request } from "express"
 import * as FCGI from "./fcgi"
-import { Client } from "./fcgi_client"
+import { FCGIClient } from "./FCGIClient"
 import debug0 from "debug"
 
 const debug = debug0("express-php-fpm")
@@ -57,7 +57,7 @@ class Handler {
   }
 }
 
-class Responder extends Client {
+class Responder extends FCGIClient {
   constructor(handler, file, req, res, next) {
     // init sockets
     super(handler.opt.socketOptions)

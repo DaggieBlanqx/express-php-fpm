@@ -1,7 +1,7 @@
 import net, { NetConnectOpts, Socket } from "net"
 import * as FCGI from "./fcgi"
 
-export class Client {
+export class FCGIClient {
   buffer = Buffer.alloc(0)
   reqId = 0
   socket: Socket
