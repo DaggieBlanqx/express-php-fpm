@@ -36,7 +36,7 @@ export class Client {
       }
 
       this.buffer = this.buffer.slice(record.recordLength)
-      this.got(record)
+      this.onRecord(record)
     }
   }
 
@@ -44,7 +44,7 @@ export class Client {
 
   onClose(hadError: boolean) {}
 
-  got(record) {
+  onRecord(record) {
     // to be implemented in child class
   }
 }

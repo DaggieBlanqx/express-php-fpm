@@ -105,7 +105,7 @@ class Responder extends Client {
     super.send(msgType, content)
   }
 
-  got(record) {
+  onRecord(record) {
     debug("got %s", FCGI.GetMsgType(record.type))
 
     switch (record.type) {
