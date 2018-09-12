@@ -43,7 +43,7 @@ class Handler {
     return i
   }
 
-  freeUpReqId(reqId) {
+  freeUpReqId(reqId: number) {
     this.connections[reqId] = false
   }
 }
