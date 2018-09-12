@@ -4,9 +4,6 @@
   "productName": "Express middleware for php-fpm",
   "description": "Express middleware for handling php requests and serve static files",
   "homepage": "https://pravdomil.com",
-  "keywords": [
-    "programming"
-  ],
   "main": "src",
   "repository": {
     "type": "git",
