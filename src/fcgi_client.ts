@@ -44,7 +44,5 @@ export class Client {
 
   onClose(hadError: boolean) {}
 
-  onRecord(record) {
-    // to be implemented in child class
-  }
+  onRecord(record) {}
 }
