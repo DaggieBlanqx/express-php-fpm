@@ -197,7 +197,5 @@ function createEnvironment(documentRoot: string, file: string, req: Request, ext
     env["HTTP_" + key.toUpperCase().replace(/-/g, "_")] = String(value)
   }
 
-  Object.assign(env, extraEnv)
-
-  return env
+  return { ...env, ...extraEnv }
 }
