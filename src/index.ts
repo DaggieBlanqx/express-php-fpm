@@ -1,4 +1,4 @@
-import express, { Request } from "express"
+import express, { NextFunction, Request, Response } from "express"
 import * as FCGI from "./FCGI"
 import { FCGIClient } from "./FCGIClient"
 import debug0 from "debug"
@@ -25,7 +25,7 @@ class Handler {
     this.router.use(express.static(opt.documentRoot))
   }
 
-  handle(req, res, next) {
+  handle(req: Request, res: Response, next: NextFunction) {
     let file = this.withoutQueryString(req.url)
     if (file.endsWith("/")) {
       file += "index.php"
