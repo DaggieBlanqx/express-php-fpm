@@ -167,9 +167,9 @@ export function NameValuePair(name, value) {
   return buff
 }
 
-export function ParseEndRequest(buff: Buffer) {
+export function parseEndRequest(buff: Buffer) {
   if (!(buff instanceof Buffer)) {
-    throw new TypeError("ParseEndRequest accepts only buffers")
+    throw new TypeError("parseEndRequest accepts only buffers")
   }
 
   const appStatus =
