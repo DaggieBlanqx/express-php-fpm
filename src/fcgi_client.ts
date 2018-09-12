@@ -41,6 +41,6 @@ export class Client {
   }
 
   got(record) {
-    // to be implemented in parent class
+    // to be implemented in child class
   }
 }
